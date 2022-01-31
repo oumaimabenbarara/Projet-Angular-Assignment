@@ -1,0 +1,13 @@
+<mat-card *ngIf="assignmentTransmis">
+    <mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
+    <mat-card-subtitle>Etes-Vous sure de voloire supprimer cette assignment?</mat-card-subtitle>
+    <div class="container">
+
+        <button mat-button mat-flat-button color="warn" (click)="ondel()">
+        Suppimer
+      </button>
+        <button mat-button mat-flat-button color="primary" (click)=" onaule()">
+            Annuler
+          </button>
+    </div>
+</mat-card>

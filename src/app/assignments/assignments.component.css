@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.ajouterBtn {
+    align-self: flex-end;
+    margin-right: 15px;
+}
+
+.paginationBtn {
+    align-self: flex-end;
+}
+
+.left {
+    align-self: flex-end;
+}
+
+.demo-table {
+    width: 100%;
+}
+
+.mat-column-demo-id {
+    width: 32px;
+    border-right: 1px solid currentColor;
+    padding-right: 24px;
+    text-align: center;
+}
+
+.mat-column-demo-nom {
+    width: 600px;
+    padding-left: 16px;
+    font-size: 20px;
+}
+
+.mat-column-demo-dateRendu {
+    font-style: italic;
+}
+
+.mat-column-demo-rendu {
+    width: 32px;
+    text-align: center;
+    font-weight: bold;
+}

@@ -1,0 +1,103 @@
+<main class="container mat-elevation-z8">
+
+    <button mat-button class="left" color="primary" (click)="decon()">Deconnexion</button>
+
+
+
+    <h2>{{titre}}</h2>
+    <p>Nb total d'assignments : {{totalDocs}}&nbsp;&nbsp;&nbsp;Nb total de pages : {{totalPages}} </p>
+    <div class="ajouterBtn">
+        <button mat-flat-button color="primary" (click)="oncreate()">
+      <mat-icon >add</mat-icon>
+      Ajouter assignment
+    </button>
+    </div>
+    <div class="ajouterBtn">
+        <p>Assignments/page:<input type="range" min=1 max=100 value=10 (change)="getAssignments()" [(ngModel)]="limit"> {{limit}}</p>
+
+    </div>
+    <div class="paginationBtn">
+        <button mat-button color="primary" (click)="premierePage()" [disabled]="page===1"> <mat-icon>first_page</mat-icon>Première</button>&nbsp;
+        <button mat-button color="primary" (click)="pagePrecedente()" [disabled]="!hasPrevPage"><mat-icon>navigate_before</mat-icon>Précédente</button>&nbsp;
+        <button mat-button color="primary" (click)="pageSuivante()" [disabled]="!hasNextPage">Suivante 	<mat-icon>navigate_next</mat-icon></button>&nbsp;
+        <button mat-button color="primary" (click)="dernierePage()" [disabled]="page===totalPages">Dernière <mat-icon>last_page</mat-icon></button>
+    </div>
+
+    <mat-divider></mat-divider>
+    <!-- <mat-list *ngFor="let assignment of assignments; let i=index">
+        <nav>
+            <a routerLink="/assignment/{{assignment.id}}">
+
+                <mat-list-item>
+
+                    <p appRendu *ngIf="assignment.rendu; else nonsoumis">
+                        {{i}} - {{assignment.nom}}, a été rendu par l'élève.
+                    </p>
+                    <ng-template #nonsoumis>
+                        <p appNonRendu>{{i}} - {{assignment.nom}} n'a pas été rendu par l'élève.</p>
+                    </ng-template>
+
+
+                </mat-list-item>
+
+            </a>
+            <div class="paginationBtn">
+                <h3 mat-subheader>{{assignment.dateDeRendu | date}}</h3>
+            </div>
+            <mat-divider></mat-divider>
+        </nav>
+    </mat-list>-->
+
+    <table mat-table [dataSource]="assignments" class="mat-elevation-z8 demo-table">
+        <!-- Position Column -->
+        <ng-container matColumnDef="demo-id">
+            <th mat-header-cell *matHeaderCellDef> Id</th>
+            <td mat-cell *matCellDef="let element"> <a routerLink="/assignment/{{element.id}}" [queryParams]="{dialog: true}"> {{element.id}}</a> </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="demo-nom">
+            <th mat-header-cell *matHeaderCellDef> Nom </th>
+            <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="demo-dateDeRendu">
+            <th mat-header-cell *matHeaderCellDef> Date de Rendu </th>
+            <td mat-cell *matCellDef="let element"> {{element.dateDeRendu| date}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="demo-rendu">
+            <th mat-header-cell *matHeaderCellDef style="padding-left: 155px;"> Rendu </th>
+            <td mat-cell *matCellDef="let element" style="padding-left: 155px;">
+
+                <p appRendu *ngIf="element.rendu; else nonsoumis">
+                    <mat-icon color="green">check_circle</mat-icon>Rendu
+                </p>
+                <ng-template #nonsoumis>
+                    <p appNonRendu>
+                        <mat-icon color="red">cancel</mat-icon> Non Rendu</p>
+                </ng-template>
+
+
+
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="actions" style="align-self: flex-end;">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element" style="padding-left: 155px;">
+                <div>
+                    <button mat-icon-button (click)="ondelete(element.id)"><mat-icon>delete_outline</mat-icon></button>
+                    <button mat-icon-button color="accent" (click)="onupdate(element.id)"><mat-icon>edit</mat-icon></button>
+                    <button mat-icon-button color="warn" (click)="ondetail(element.id)"><mat-icon>description</mat-icon></button>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+
+</main>
